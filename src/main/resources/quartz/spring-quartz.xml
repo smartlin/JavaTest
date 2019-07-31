@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd
+        http://www.springframework.org/schema/beans">
+
+    <context:component-scan base-package="quartz.demo"/>
+    <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
+        <property name="driverClass">
+            <value>com.mysql.cj.jdbc.Driver</value>
+        </property>
+        <property name="jdbcUrl">
+            <value>jdbc:mysql://localhost:3306/quartz?serverTimezone=GMT%2B8</value>
+        </property>
+        <property name="user">
+            <value>root</value>
+        </property>
+        <property name="password">
+            <value>root</value>
+        </property>
+    </bean>
+
+    <!-- 配置线程池-->
+    <bean name="taskExecutor" class="org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor">
+        <property name="corePoolSize" value="10"/>
+        <property name="maxPoolSize" value="20"/>
+        <property name="queueCapacity" value="100"/>
+    </bean>
+
+    <!-- 自定义任务 -->
+    <bean id="helloTask" class="quartz.demo.HelloTask"/>
+    <bean id="helloTask1" class="quartz.demo.HelloTask1"/>
+
+    <bean id="simpleJobDetail" class="org.springframework.scheduling.quartz.JobDetailFactoryBean">
+        <property name="jobClass" value="quartz.demo.HelloTask"/>
+        <!--<property name="name" value="doTask"/>-->
+        <property name="durability" value="true"/>
+        <!--requestsRecovery属性必须设置为 true，当Quartz服务被中止后，再次启动或集群中其他机器接手任务时会尝试恢复执行之前未完成的所有任务。-->
+        <property name="requestsRecovery" value="true" />
+    </bean>
+
+    <!--配置调度使用的触发器-->
+    <!--提供了两种触发器类型：SimpleTriggerFactoryBean和CronTriggerFactoryBean-->
+    <bean id="simpleTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+        <property name="jobDetail" ref="simpleJobDetail"/>
+        <property name="cronExpression" value="0/5 * * ? * *" />
+    </bean>
+
+    <!-- 配置调度任务-->
+    <bean class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+        <property name="configLocation" value="classpath:quartz/quartz.properties"/>
+        <property name="dataSource" ref="dataSource"/>
+        <property name="taskExecutor" ref="taskExecutor"/>
+        <property name="jobDetails">
+            <list>
+                <ref bean="simpleJobDetail"/>
+            </list>
+        </property>
+        <property name="triggers">
+            <list>
+                <ref bean="simpleTrigger"/>
+            </list>
+        </property>
+    </bean>
+</beans>

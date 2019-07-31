@@ -1,0 +1,3 @@
+WebService推荐解决方案
+wsimport命令 cmd下 jdk1.6以上
+wsimport -s . -p (包名) (wsdl文档地址) 解析完成后可以形成class与java源文件

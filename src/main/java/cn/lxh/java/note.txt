@@ -1,0 +1,14 @@
+一、基本数据类型
+boolean 1 位 - - Boolean
+char 16 位 Unicode 0 Unicode 2 的 16 次方-1 Character
+byte 8 位 -128 +127 Byte
+short 16 位 -2 的 15 次方 +2 的 15 次方-1 Short
+int 32 位 -2 的 31 次方 +2 的 31 次方-1 Integer
+long 64 位 -2 的 63 次方 +2 的 63 次方-1 Long
+float 32 位 IEEE754 IEEE754 Float
+double 64 位 IEEE754 IEEE754 Double
+
+二、String
+  如果想通过“加号”连接
+  字串（使用 Java 的早期版本），请务必保证第一个元素是字串（或加上引号的一系列字符，编译能将其识别
+  成一个字串）。

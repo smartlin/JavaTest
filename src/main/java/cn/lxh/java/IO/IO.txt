@@ -1,0 +1,139 @@
+1.字节流的抽象父类（带Stream都是字节流）
+    InputStream（读） OutputStream（写）
+2.字符流发的抽象父类
+    Reader Writer
+    BufferedReader BufferedWrite
+3.如何选择用哪一种流（前面2点确定后，后面很简单）
+  1) 明确源和目的
+     源：输入流。InputStream Reader(InputStreamReader)
+     目的：输出流。 OutputStream Writer(OutputStreamWriter)
+  2) 操作的数据是否是纯文本
+     是：字符流
+     不是：字节流
+  3) 当体系明确后，在明确具体使用哪个具体的对象
+     通过设备来区分：
+     源设备：内存、硬盘、键盘
+     目的设备：内存、硬盘、控制台
+  4) 操作文件 File
+     输出流：FileOutputStream  FileWriter
+     输入流：FileInputStream   FileReader
+
+     #####是否需要定义缓冲区，定义缓冲区一般提高效率
+     #####定义缓冲区：使用Reader体系中的BufferedReader 、使用Writer体系中的BufferedWriter
+
+
+     字节输入流操作步骤：
+      * A:创建字节输入流对象
+      * B:调用read()方法读取数据，并把数据显示在控制台
+      * C:释放资源
+      读取数据的方式：
+       * A:int read():一次读取一个字节
+       * B:int read(byte[] b):一次读取一个字节数组
+
+     字节输出流操作步骤：
+      * A:创建字节输出流对象
+      * B:调用write()方法
+      * C:释放资源
+
+
+      BufferedReader                BufferedWriter
+      BufferedInputStream           BufferedOutputStream
+      FileInputStream               FileOutputStream
+      InputStreamReader             OutputStreamWriter
+      FileReader                    FileWriter
+      DataInputStream               DataOutputStream
+
+       字符缓冲流的特殊方法：
+       BufferedWriter:
+           * public void newLine():根据系统来决定换行符
+           * 将文本写入字符输出流，缓冲各个字符，从而提供单个字符、数组和字符串的高效写入。
+           * 可以指定缓冲区的大小，或者接受默认的大小。在大多数情况下，默认值就足够大了。
+       BufferedReader:
+          * public String readLine()：一次读取一行数据
+          * 包含该行内容的字符串，不包含任何行终止符，如果已到达流末尾，则返回 null
+          * 从字符输入流中读取文本，缓冲各个字符，从而实现字符、数组和行的高效读取。
+          * 可以指定缓冲区的大小，或者可使用默认的大小。大多数情况下，默认值就足够大了。
+
+       /*
+        * 可以读写基本数据类型的数据
+        * 数据输入流：DataInputStream
+        *    DataInputStream(InputStream in)
+        * 数据输出流：DataOutputStream
+        *    DataOutputStream(OutputStream out)
+        */
+
+        /*
+         * InputStreamReader(InputStream is):用默认的编码读取数据
+         * InputStreamReader(InputStream is,String charsetName):用指定的编码读取数据
+
+          * InputStreamReader的方法：
+          * int read():一次读取一个字符
+          * int read(char[] chs):一次读取一个字符数组
+
+         * OutputStreamWriter(OutputStream out):根据默认编码把字节流的数据转换为字符流
+         * OutputStreamWriter(OutputStream out,String charsetName):根据指定编码把字节流数据转换为字符流
+         * 把字节流转换为字符流。
+         * 字符流 = 字节流 +编码表。
+
+         * OutputStreamWriter的方法：
+          * public void write(int c):写一个字符
+          * public void write(char[] cbuf):写一个字符数组
+          * public void write(char[] cbuf,int off,int len):写一个字符数组的一部分
+          * public void write(String str):写一个字符串
+          * public void write(String str,int off,int len):写一个字符串的一部分
+
+           * 由于我们常见的操作都是使用本地默认编码，所以，不用指定编码。
+           * 而转换流的名称有点长，所以，Java就提供了其子类供我们使用。
+           * OutputStreamWriter = FileOutputStream + 编码表(GBK)
+           * FileWriter = FileOutputStream + 编码表(GBK)
+           *
+           * InputStreamReader = FileInputStream + 编码表(GBK)
+           * FileReader = FileInputStream + 编码表(GBK)
+           *
+         */
+
+        /*
+         * 内存操作流：用于处理临时存储信息的，程序结束，数据就从内存中消失。
+         * 字节数组：
+         *   ByteArrayInputStream
+         *   ByteArrayOutputStream
+         * 字符数组：
+         *   CharArrayReader
+         *   CharArrayWriter
+         * 字符串：
+         *   StringReader
+         *   StringWriter
+         */
+
+
+
+        /*
+         * 打印流
+         * 字节流打印流 PrintStream
+         * 字符打印流 PrintWriter
+         */
+         * 打印流的特点：
+         *   A:只有写数据的，没有读取数据。只能操作目的地，不能操作数据源。
+         *   B:可以操作任意类型的数据。
+         *   C:如果启动了自动刷新，能够自动刷新。
+         *   D:该流是可以直接操作文本文件的。
+         *    哪些流对象是可以直接操作文本文件的呢?
+         *    FileInputStream
+         *    FileOutputStream
+         *    FileReader
+         *    FileWriter
+         *    PrintStream
+         *    PrintWriter
+         *    看API,查流对象的构造方法，如果同时有File类型和String类型的参数，一般来说就是可以直接操作文件的。
+         *
+         *    流：
+         *     基本流：就是能够直接读写文件的
+         *     高级流：在基本流基础上提供了一些其他的功能
+
+           * 1:可以操作任意类型的数据。
+            *   print()
+            *   println()
+            * 2:启动自动刷新
+            *   PrintWriter pw = new PrintWriter(new FileWriter("pw2.txt"), true);
+            *   还是应该调用println()的方法才可以
+            *   这个时候不仅仅自动刷新了，还实现了数据的换行。
