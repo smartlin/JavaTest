@@ -18,15 +18,15 @@ public class IteratorDemo {
         all.add("world");
         all.add("Hello1");
         all.add("你好");
-//        Iterator<String> itr = all.iterator();
-//        while(itr.hasNext()){//hasNext() 判断是否有数据
-//            String str = itr.next();//next()取得数据
-//            System.out.println(str);
-//        }
-        //输出集合另外一种写法,for循环结束后 itr释放了内存
-        for(Iterator<String> itr = all.iterator();itr.hasNext();){
+        Iterator<String> itr = all.iterator();
+        while(itr.hasNext()){//hasNext() 判断是否有数据
             String str = itr.next();//next()取得数据
             System.out.println(str);
         }
+        //输出集合另外一种写法,for循环结束后 itr释放了内存
+        //for(Iterator<String> itr = all.iterator();itr.hasNext();){
+        //    String str = itr.next();//next()取得数据
+        //    System.out.println(str);
+        //}
     }
 }
