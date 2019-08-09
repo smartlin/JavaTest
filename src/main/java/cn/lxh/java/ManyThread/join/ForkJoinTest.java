@@ -1,4 +1,4 @@
-package cn.lxh.java.ManyThread;
+package cn.lxh.java.ManyThread.join;
 
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ForkJoinPool;

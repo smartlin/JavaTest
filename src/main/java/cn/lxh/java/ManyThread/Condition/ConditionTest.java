@@ -1,4 +1,4 @@
-package cn.lxh.java.ManyThread;
+package cn.lxh.java.ManyThread.Condition;
 
 import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.Lock;

@@ -1,4 +1,4 @@
-package cn.lxh.java.ManyThread;
+package cn.lxh.java.ManyThread.ThreadLocal;
 
 import java.io.IOException;
 import java.net.ServerSocket;
