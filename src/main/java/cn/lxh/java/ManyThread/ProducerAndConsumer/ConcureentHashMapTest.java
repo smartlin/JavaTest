@@ -1,4 +1,4 @@
-package cn.lxh.java.ManyThread;
+package cn.lxh.java.ManyThread.ProducerAndConsumer;
 
 import java.util.concurrent.ConcurrentHashMap;
 

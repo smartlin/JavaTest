@@ -1,4 +1,4 @@
-package cn.lxh.java.ManyThread;
+package cn.lxh.java.ManyThread.ProducerAndConsumer;
 
 /**
  * 生产者与消费者模型

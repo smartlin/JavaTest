@@ -10,6 +10,7 @@ import java.util.concurrent.*;
 public class FutureTaskTest {
     public static void main(String[] args) {
         ExecutorService executorService = Executors.newCachedThreadPool();
+        //这里定义的task为FutureTest中的task
         Task task = new Task();
         FutureTask<Integer> futureTask = new FutureTask<Integer>(task);
         executorService.submit(futureTask);

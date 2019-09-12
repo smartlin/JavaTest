@@ -1,7 +1,5 @@
 package cn.lxh.java.ManyThread.join;
 
-import java.util.concurrent.TimeUnit;
-
 /**
  * Created by starlin
  * on 2017/02/25 22:58.
@@ -14,22 +12,28 @@ import java.util.concurrent.TimeUnit;
 public class JoinTest {
     public static void main(String[] args) throws InterruptedException {
         System.out.println("method main begin");
-        Thread thread = new Thread(new Runnable() {
-            int i = 0;
-            @Override
-            public void run() {
-                while (true){
-                    System.out.println(i++);
-                    try{
-                        TimeUnit.MILLISECONDS.sleep(100);
-                    }catch (Exception e){
-                        e.printStackTrace();
-                    }
-                }
-            }
-        });
+        Thread thread = new Thread(new JoinDemo() {});
         thread.start();
-        thread.join(2000);
+        for (int i = 0; i < 20; i++) {
+            System.out.println("主线程第"+ i +"次执行");
+            if (i > 2) {
+                thread.join();
+            }
+        }
+        //thread.join(50000);
+        //thread.wait();
+        //Thread.sleep(2000);
+        //Thread.yield();
         System.out.println("method main end");
+    }
+}
+
+class JoinDemo implements Runnable {
+
+    @Override
+    public void run() {
+        for (int i = 0; i < 10; i++) {
+            System.out.println("线程1第" + i + "次执行");
+        }
     }
 }
