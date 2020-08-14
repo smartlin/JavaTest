@@ -1,6 +1,7 @@
 package cn.lxh.java.Clone;
 
 import java.io.Serializable;
+import java.util.Arrays;
 
 /**
  * Created by starlin
@@ -56,7 +57,7 @@ public class Person implements Cloneable, Serializable {
         //定义父亲
         Person father = new Person("父亲");
         //定义大儿子
-        Person son1 = new Person("大儿子",father);
+        Person son1 = new Person("大儿子", father);
         //定义小儿子，通过克隆的方式
         Person son2 = son1.clone();
         //定义小儿子的name
@@ -64,12 +65,18 @@ public class Person implements Cloneable, Serializable {
         //给小儿子，找个干爹
         son2.getFather().setName("干爹");
 
-        System.out.println(son1.getName()+" 的父亲是 "+son1.getFather().getName());
-        System.out.println(son2.getName()+" 的父亲是 "+son2.getFather().getName());
+        System.out.println(son1.getName() + " 的父亲是 " + son1.getFather().getName());
+        System.out.println(son2.getName() + " 的父亲是 " + son2.getFather().getName());
 
         Integer in1 = new Integer(10);
         System.out.println(in1.hashCode());
         Integer in2 = new Integer(10);
         System.out.println(in2.hashCode());
+
+        Person[] p1 = {new Person("starlin")};
+        Person[] p2 = Arrays.copyOf(p1,p1.length);
+        p1[0].setName("smartlin");
+        System.out.println("p1--->" + p1[0].getName());
+        System.out.println("p2--->" + p2[0].getName());
     }
 }
