@@ -1,0 +1,29 @@
+package cn.lxh.java.ManyThread.ThreadLocal;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+
+/**
+ * Created by starlin
+ * on 2020/8/26 18:37.
+ */
+public class SimpleDateFormatTest {
+    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd HH:mm:ss");
+
+    public static void main(String[] args) {
+        final SimpleDateFormatTest simpleDateFormatTest = new SimpleDateFormatTest();
+        ExecutorService executorService = Executors.newCachedThreadPool();
+        for (int i = 0; i < 100; i++) {
+            executorService.submit(()->{
+                try {
+                    System.out.println(simpleDateFormatTest.dateFormat.parse("2020-08-26 18:41:10"));
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+            });
+        }
+        executorService.shutdown();
+    }
+}
