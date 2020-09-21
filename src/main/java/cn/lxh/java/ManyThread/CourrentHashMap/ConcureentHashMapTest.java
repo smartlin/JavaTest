@@ -1,4 +1,4 @@
-package cn.lxh.java.ManyThread;
+package cn.lxh.java.ManyThread.CourrentHashMap;
 
 import java.util.concurrent.ConcurrentHashMap;
 
