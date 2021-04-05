@@ -6,7 +6,7 @@ package cn.lxh.java.DesignStyle.SingletonDemo;
  * on 2015/09/21 20:13.
  */
 class SingletonDemoL{
-    private static SingletonDemoL instance = null;
+    private static volatile SingletonDemoL instance = null;
     private SingletonDemoL(){
 
     }

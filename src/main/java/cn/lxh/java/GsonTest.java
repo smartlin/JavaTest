@@ -24,6 +24,5 @@ public class GsonTest {
         System.out.println("student.getAddress() = " + list.get(0).getId());
         System.out.println("student.getDateOfBirth() = "
                 + list.get(0).getGroupNum());
-
     }
 }

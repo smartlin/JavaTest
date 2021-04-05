@@ -14,7 +14,5 @@ public class Test {
         System.out.println(b.intern() == d.intern());
         System.out.println(Integer.valueOf("10",16));
         System.out.println(Integer.parseInt("2",16));*/
-
-
     }
 }
