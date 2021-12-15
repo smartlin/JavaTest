@@ -16,7 +16,8 @@ public class ProducerDemo {
     public static void main(String[] args) throws Exception {
         DefaultMQProducer producer = new DefaultMQProducer("starlin-user");
         //指定NameServer地址，多个地址以 ; 隔开
-        producer.setNamesrvAddr("192.168.235.134:9876");
+        //producer.setNamesrvAddr("172.16.0.218:9876");
+        producer.setNamesrvAddr("192.168.32.190:9876");
 
         /**
         * Producer对象在使用之前必须要调用start初始化，初始化一次即可

@@ -20,9 +20,9 @@ public class ConsumerDemo {
     // 我们的消费者也制定了主题为"starlin-user"，
     // 而且它也指定了命名服务器的地址，然后设置了在收到消息后的处理方式，然后就启动了消费者。
     public static void main(String[] args) throws MQClientException {
-        DefaultMQPushConsumer consumer = new DefaultMQPushConsumer("starlin-user");
+        DefaultMQPushConsumer consumer = new DefaultMQPushConsumer("benchmark_consumer");
         //指定NameServer地址，多个地址以 ; 隔开
-        consumer.setNamesrvAddr("192.168.235.134:9876");
+        consumer.setNamesrvAddr("192.168.32.190:9876");
         consumer.subscribe("user","push");
         /**
          * 设置Consumer第一次启动是从队列头部开始消费还是队列尾部开始消费
