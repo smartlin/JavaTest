@@ -27,7 +27,6 @@ public class SemaphoreDemo {
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
-
                 }
             };
             service.execute(runnable);
