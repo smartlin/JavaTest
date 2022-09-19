@@ -8,9 +8,9 @@ package cn.lxh.java.ManyThread;
 public class GetThreadName {
     public static void main(String[] args) {
         System.out.println(Thread.currentThread().getName());
-        for(int i=0;i<10;i++){
-            new Thread(""+ i){//定义线程的名称i
-                public void run(){
+        for (int i = 0; i < 10; i++) {
+            new Thread("" + i) {//定义线程的名称i
+                public void run() {
                     System.out.println("Thread " + getName() + " running");
                 }
             }.start();
