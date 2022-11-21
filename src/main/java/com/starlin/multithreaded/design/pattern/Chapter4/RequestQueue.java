@@ -19,7 +19,7 @@ public class RequestQueue {
         while (queue.peek() == null) {
             //当前时间
             long now = System.currentTimeMillis();
-            //剩余的等待时间
+            //剩余的等待时间，超过30秒抛出异常
             long rest = TIMEOUT - (now-start);
             if (rest <= 0) {
                 throw new LivenessException("throw by " + Thread.currentThread().getName());
