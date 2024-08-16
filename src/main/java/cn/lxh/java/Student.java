@@ -38,5 +38,12 @@ public class Student {
         this.des = des;
     }
 
-
+    @Override
+    public String toString() {
+        return "Student{" +
+                "id='" + id + '\'' +
+                ", des='" + des + '\'' +
+                ", groupNum='" + groupNum + '\'' +
+                '}';
+    }
 }
